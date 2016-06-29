@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="components/loader.css">
+    <script src="components/loader.js"></script>
+    <script src="components/monaca-jquery/jquery.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/common.js"></script>
+    <script>
+
+        // ページ読み込み時に実行
+        window.onload = function () {
+          // ランダムに数字を生成（5～10）
+          randomNum = Math.floor( Math.random() * 6 ) + 5;
+          
+          console.log(randomNum);
+<!--
+
+  // タッチイベントに対応している
+	if(window.TouchEvent){
+
+		// イベントリスナーに対応している
+		if(window.addEventListener){
+
+			// ------------------------------------------------------------
+			// タッチすると実行される関数
+			// ------------------------------------------------------------
+			function TouchEventFunc(e){
+				console.log("タッチスクリーン入力された");// 100ミリ秒ごとに「countUpDown()」関数を呼び出す繰り返しタイマー
+              intervalID = setInterval(
+                function(){
+                  countUpDown( 1 , randomNum );
+                },
+                1000
+              );
+			}
+      function TouchEventFunc3(e){
+  			console.log("タッチスクリーンおわり");
+              // 繰り返しタイマーを中止
+              clearInterval( intervalID );
+			}
+
+			// ------------------------------------------------------------
+			// リッスンを開始する
+			// ------------------------------------------------------------
+			// "aaa" という ID 属性のエレメントを取得する
+			var element = document.getElementById("sampleA");
+
+			// タッチを開始すると実行されるイベント
+			element.addEventListener("touchstart",TouchEventFunc);
+
+			// タッチしたまま平行移動すると実行されるイベント
+			//element.addEventListener("touchmove",TouchEventFunc);
+
+			// タッチを終了すると実行されるイベント
+			element.addEventListener("touchend",TouchEventFunc3);
+		}
+	}
+
+    //-->
+
+// var element = document.getElementById("sampleA");
+// 
+// if ("ontouchstart" in window) {
+//     libAddEvent(element, "touchstart", EventFunc);
+//     libAddEvent(element, "touchmove",  EventFunc);
+//     libAddEvent(element, "touchend",   EventFunc);
+// } else {
+//     libAddEvent(element, "click",      EventFunc);
+// }
+
+
+
+
+
+
+
+
+
+          // id属性値が「sampleOutput」である要素への参照を変数「$sampleOutput」に代入
+          var sampleOutput = document.getElementById( "sampleOutput" );
+
+          // id属性値が「sampleA」である要素への参照を変数「$sampleAElement」に代入
+          var sampleAElement = document.getElementById( "sampleA" );
+console.log(sampleAElement);
+          // マウスダウンイベント（ボタンを押した時のイベント）にイベントハンドラをバインド
+          sampleAElement.touchstart = function ( event ) {
+
+            // 押したボタンが左ボタンの場合の処理
+            if( event.button == 0 ){
+
+              // 20ミリ秒ごとに「countUpDown()」関数を呼び出す繰り返しタイマー
+              intervalID = setInterval(
+                function(){
+                  countUpDown( 0.1 );
+                },
+                20
+              );
+
+            }
+
+          }
+
+          // マウスアップイベント（ボタンを放した時のイベント）にイベントハンドラをバインド
+          sampleAElement.touchend = function ( event ) {
+
+            // 押したボタンが左ボタンの場合の処理
+            if( event.button == 0 ){
+
+              // 繰り返しタイマーを中止
+              clearInterval( intervalID );
+
+            }
+
+          }
+
+        }
+        
+        
+//         function libAddEvent(obj, type, func) {
+//     if (obj.addEventListener) {
+//         obj.addEventListener(type, func, false);
+//     } else {
+//         if (obj.attachEvent) {
+//             obj.attachEvent('on' + type, func);
+//         }
+//     }
+// }
+    </script>
+</head>
+<body>
+    <div id="sampleOutput" >1</div>
+    <div id="sampleController">
+        <img id="sampleA" src="img/fusen_01.png" alt="fusen.png" />
+    </div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="components/loader.css">
+    <script src="components/loader.js"></script>
+    <script>
+        var beeId;
+        var beeX = 0;
+        var beeY = 0;
+        var sita = 0;
+        var CENTERX = 150;
+        var CENTERY = 200;
+        var r = 50;
+        function moveBee(){
+            sita += 1;
+            sita %= 360;
+            var cosS = Math.cos(sita * (Math.PI / 180));
+            var sinS = Math.sin(sita * (Math.PI / 180));
+            var beeX = (cosS)*r + CENTERX + "px";
+            var beeY = (sinS)*r + CENTERY + "px";
+            document.getElementById("bee_wrap").style.left = beeX;
+            document.getElementById("bee_wrap").style.top = beeY;
+        }
+        
+        function penaltyOpne(){
+            var popup = document.getElementById("popup1");
+            
+            // 罰ゲームを決定する
+            var randnum = 0;
+            var penaltyId = 0;
+            var penaltyMsgs =  ["腕立て伏せ１００回", "腹筋１００回", "しっぺ", "３回回ってワン", "お手"];
+            var message = "";
+            
+            randnum = Math.floor( Math.random() * 5 );
+            message = penaltyMsgs[randnum];
+            
+            // メッセージをポップアップに設定する
+            document.getElementById("popup1_msg").innerHTML = message;
+            
+            // ポップアップの幅と高さを設定する
+            var newWidth = window.innerWidth;
+            var newHeight = window.innerHeight;
+            
+            newWidth = (newWidth / 3) * 2;
+            newHeight = (newHeight / 3) * 2;
+            
+            popup.style.width = newWidth + "px";
+            popup.style.height = newHeight + "px";
+            
+            // ポップアップの幅と高さからmarginを計算する
+            var mT = (popup.style.height / 2) * (-1) + 'px';
+            var mL = (popup.style.width / 2) * (-1) + 'px';
+            
+            // marginを設定して表示
+            popup.style.display = "none";
+            //popup.style.margin-top = mT;
+            //popup.style.margin-left = mL;
+            popup.style.opacity = 0;
+  		popup.style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+            
+            // 徐々に表示する
+            var opacity = 0;
+            penaltyId = setInterval(function(){
+                opacity = opacity + 0.03;
+                document.getElementById("popup1").style.opacity = opacity;
+                if(opacity >= 1){
+                    clearInterval(penaltyId);
+                }
+            },100);
+            
+            return false;
+        }
+        
+        function penaltyClose(){
+            var popup = document.getElementById("popup1");
+            
+            // ポップアップを閉じる
+            popup.style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+ 
+            return false;
+        }
+        
+        function setImgSize(){
+            var newWidth = window.innerWidth;
+            
+            document.getElementById("main_wrap").style.width = newWidth + "px";
+            document.getElementById("main_wrap").children.namedItem("balloonImg").setAttribute("width", newWidth + "px");
+        }
+        
+        window.onload = function(){
+            setImgSize();
+            beeId = setInterval("moveBee()",100);
+            document.getElementById("bee_wrap").onclick = function(){
+                penaltyOpne();
+            };
+            document.getElementById("popup1_close_btn").onclick = function(){
+                penaltyClose();
+            };
+        };
+        
+    </script>
+    <style type="text/css">
+    <!--
+        a:link{text-decoration: none;}
+        ul{padding: 0px; margin: 0px;}
+        li{margin: 0px; list-style:outside none;}
+        
+        
+        .bee_wrap{position: absolute; z-index: 9999;}
+        .bee{width: 40px; height: 40px;}
+        
+        .penalty_wrap{position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100px; height: 200px; margin: auto; z-index: 999; opacity: 0;}
+        
+        .setting_btn_wrap{position: absolute; top: 10px; right: 10px;}
+        
+        .setting_btn{width: 30px; height: 30px;}
+        
+        .title{position: relative; top: 0; text-align: center;}
+        
+        .main_wrap{position: relative; top: 0; left: 0; background-color: #ccc;}
+        .balloon{position: relative; top: 0; left: 0;}
+        .restart_btn{position: relative; text-align: center; padding-top: 5px;}
+        
+        .popup {display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 300px; height: 450px; margin: auto; background-color: #fff; overflow: hidden; z-index: 9998;}
+        .popup_inner { padding: 20px;}
+        #overlay {display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #000; opacity: 0.7; z-index: 100;}
+ 
+        #popup1 { width: 300px;}
+    -->
+    </style>
+</head>
+<body>
+    <div id="popup1" class="popup">
+        <div class="popup_inner">
+            <h4>罰ゲーム</h4>
+            <div>
+                <p id="popup1_msg"></p>
+                <input type="button" id="popup1_close_btn" class="close_btn" value="閉じる"/>
+            </div>
+        </div>
+    </div>
+    <div id="overlay"></div>
+    <div class="bee_wrap" id="bee_wrap">
+        <img class="bee" name="bee" src="./img/bee_left.png"/>
+    </div>
+    <div class="penalty_wrap" id="penalty_wrap">
+    </div>
+    <ul class="page_wrap">
+        <li class="setting_btn_wrap">
+            <a href="./setting.html"><img class="setting_btn" src="./img/icon_setting.png"/></a>
+        </li>
+        <li class="title">
+            <p>おわり</p>
+        </li>
+        <li class="main_wrap" id="main_wrap">
+            <img class="balloon" name="balloonImg" src="./img/fusen_haretsu_02.png" />
+            <div class="restart_btn">
+                <a href="./balloon.html"><img src="./img/restart_btn.png" /></a>
+            </div>
+        </li>
+    </ul>
+</body>
+</html>
