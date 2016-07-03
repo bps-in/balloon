@@ -10,131 +10,60 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/common.js"></script>
     <script>
-
         // ページ読み込み時に実行
         window.onload = function () {
           // ランダムに数字を生成（5～10）
           randomNum = Math.floor( Math.random() * 6 ) + 5;
           
           console.log(randomNum);
-<!--
+//<!--
+        // タッチイベントに対応している
+        if(window.TouchEvent){
+            // イベントリスナーに対応している
+            if(window.addEventListener){
+                // ------------------------------------------------------------
+                // リッスンを開始する
+                // ------------------------------------------------------------
+                // "balloon" という ID 属性のエレメントを取得する
+                var element = document.getElementById("balloon");
 
-  // タッチイベントに対応している
-	if(window.TouchEvent){
+                // タッチを開始すると実行されるイベント
+                element.addEventListener("touchstart",TouchEventFunc);
 
-		// イベントリスナーに対応している
-		if(window.addEventListener){
+                // タッチしたまま平行移動すると実行されるイベント
+                //element.addEventListener("touchmove",TouchEventFunc);
 
-			// ------------------------------------------------------------
-			// タッチすると実行される関数
-			// ------------------------------------------------------------
-			function TouchEventFunc(e){
-				console.log("タッチスクリーン入力された");// 100ミリ秒ごとに「countUpDown()」関数を呼び出す繰り返しタイマー
-              intervalID = setInterval(
-                function(){
-                  countUpDown( 1 , randomNum );
-                },
-                1000
-              );
-			}
-      function TouchEventFunc3(e){
-  			console.log("タッチスクリーンおわり");
-              // 繰り返しタイマーを中止
-              clearInterval( intervalID );
-			}
-
-			// ------------------------------------------------------------
-			// リッスンを開始する
-			// ------------------------------------------------------------
-			// "aaa" という ID 属性のエレメントを取得する
-			var element = document.getElementById("sampleA");
-
-			// タッチを開始すると実行されるイベント
-			element.addEventListener("touchstart",TouchEventFunc);
-
-			// タッチしたまま平行移動すると実行されるイベント
-			//element.addEventListener("touchmove",TouchEventFunc);
-
-			// タッチを終了すると実行されるイベント
-			element.addEventListener("touchend",TouchEventFunc3);
-		}
-	}
-
-    //-->
-
-// var element = document.getElementById("sampleA");
-// 
-// if ("ontouchstart" in window) {
-//     libAddEvent(element, "touchstart", EventFunc);
-//     libAddEvent(element, "touchmove",  EventFunc);
-//     libAddEvent(element, "touchend",   EventFunc);
-// } else {
-//     libAddEvent(element, "click",      EventFunc);
-// }
-
-
-
-
-
-
-
-
-
-          // id属性値が「sampleOutput」である要素への参照を変数「$sampleOutput」に代入
-          var sampleOutput = document.getElementById( "sampleOutput" );
-
-          // id属性値が「sampleA」である要素への参照を変数「$sampleAElement」に代入
-          var sampleAElement = document.getElementById( "sampleA" );
-console.log(sampleAElement);
-          // マウスダウンイベント（ボタンを押した時のイベント）にイベントハンドラをバインド
-          sampleAElement.touchstart = function ( event ) {
-
-            // 押したボタンが左ボタンの場合の処理
-            if( event.button == 0 ){
-
-              // 20ミリ秒ごとに「countUpDown()」関数を呼び出す繰り返しタイマー
-              intervalID = setInterval(
-                function(){
-                  countUpDown( 0.1 );
-                },
-                20
-              );
-
+                // タッチを終了すると実行されるイベント
+                element.addEventListener("touchend",TouchEventEnd);
+                
+                // ------------------------------------------------------------
+                // タッチすると実行される関数
+                // ------------------------------------------------------------
+                function TouchEventFunc(e){
+                    // 1000ミリ秒ごとに「countUpDown()」関数を呼び出す繰り返しタイマー
+                    console.log("タッチスクリーン入力された");
+                              intervalID = setInterval(
+                                function(){
+                                  countUpDown( 1 , randomNum );
+                                },
+                                1000
+                              );
+                }
+                function TouchEventEnd(e){
+                    console.log("タッチスクリーンおわり");
+                    // 繰り返しタイマーを中止
+                    clearInterval( intervalID );
+                }
             }
-
-          }
-
-          // マウスアップイベント（ボタンを放した時のイベント）にイベントハンドラをバインド
-          sampleAElement.touchend = function ( event ) {
-
-            // 押したボタンが左ボタンの場合の処理
-            if( event.button == 0 ){
-
-              // 繰り返しタイマーを中止
-              clearInterval( intervalID );
-
-            }
-
-          }
-
         }
-        
-        
-//         function libAddEvent(obj, type, func) {
-//     if (obj.addEventListener) {
-//         obj.addEventListener(type, func, false);
-//     } else {
-//         if (obj.attachEvent) {
-//             obj.attachEvent('on' + type, func);
-//         }
-//     }
-// }
+      }
+    //-->
     </script>
 </head>
 <body>
-    <div id="sampleOutput" >1</div>
+    <input type="hidden" id="countTime"  value="0" >
     <div id="sampleController">
-        <img id="sampleA" src="img/fusen_01.png" alt="fusen.png" />
+        <img id="balloon" src="img/fusen_01.png" alt="fusen.png" />
     </div>
 </body>
 </html>
