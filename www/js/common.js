@@ -9,21 +9,29 @@ function countUpDown( num , randomNum) {
     console.log("randomNum");
     console.log(randomNum);
     
-    var countTime = $(".countTime").val();
-    var sampleOutput = document.getElementById( "sampleOutput" );
-    sampleOutput.innerHTML = parseInt( sampleOutput.innerHTML ) + num;
-    // if ((parseInt( sampleOutput.innerHTML ) + num) < 10) {
+    var countTime = parseInt($("#countTime").val());
+    countTime++;
+    $("#countTime").val(countTime);
+    console.log("countTime");
+    console.log(countTime);
+    console.log(countTime < randomNum);
+    if (countTime > randomNum) {
         // alert("バン");
-                            // clearInterval( intervalID );
-    // } else {
-    resizeImagePercent(countTime);
+        clearInterval( intervalID );
+        location.href = "result.html";
+    } else {
+        resizeImagePercent(countTime * 2);
         
-    // }
+    }
 }
 
 // 画像を引数倍する
 function resizeImagePercent( resizeRate ) {
-    var resizeImg = document.getElementById("balloon");
-    resizeImg.width = resizeImg.naturalWidth * resizeRate;
-    resizeImg.height = resizeImg.naturalHeight * resizeRate;
+    var resizeImg = $("#balloon");
+    $("#balloon").animate({ 
+        top: 0,
+        left: 0,
+        width: resizeImg.width() + resizeRate +'px',
+        height: height = resizeImg.height() + resizeRate+'px'
+    }, 1000 );
 }

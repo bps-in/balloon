@@ -1,26 +1,13 @@
-#sampleA,
-#sampleB {
-    padding: 5% 15%;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-}
-#sampleA {
-    /*background-color: red;*/
-}
-#sampleB {
-    background-color: blue;
-}
-#sampleController {
-    width: 360px;
-    margin: 10px 0;
-    text-align: center;
-}
-#sampleOutput {
-    width: 300px;
-    padding: 30px;
-    font-size: 30px;
-    background-color: yellow;
-    text-align: center;
-    border-radius: 10px;
+#balloon {
+  width:100px;
+  height:150px;
+  background: url('../img/fusen_01.png');
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  -moz-background-size:cover;
+  background-size:cover;
 }
