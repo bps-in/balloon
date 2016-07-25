@@ -45,7 +45,7 @@
             var newHeight = window.innerHeight;
             
             newWidth = (newWidth / 3) * 2;
-            newHeight = (newHeight / 3) * 2;
+            newHeight = (newHeight / 3);
             
             popup.style.width = newWidth + "px";
             popup.style.height = newHeight + "px";
@@ -88,8 +88,10 @@
         function setImgSize(){
             var newWidth = window.innerWidth;
             
-            document.getElementById("main_wrap").style.width = newWidth + "px";
-            document.getElementById("main_wrap").children.namedItem("balloonImg").setAttribute("width", newWidth + "px");
+            // document.getElementById("main_wrap").style.width = newWidth + "px";
+            // document.getElementById("main_wrap").children.namedItem("balloonImg").setAttribute("width", newWidth + "px");
+            document.getElementById("main_wrap").style.width = "100%";
+            document.getElementById("main_wrap").children.namedItem("balloonImg").setAttribute("width", "100%");
         }
         
         window.onload = function(){
@@ -126,8 +128,12 @@
         /*.balloon{position: relative; top: 0; left: 0;} */
         .restart_btn{position: relative; text-align: center; padding-top: 5px;}
         
-        .popup {display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 300px; height: 450px; margin: auto; background-color: #fff; overflow: hidden; z-index: 9998;}
+        .popup {display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 50%; height: 50%; margin: auto; background-color: #ffcc66; overflow: hidden; z-index: 9998;border-radius: 20px;}
         .popup_inner { padding: 20px;}
+        #popup1_msg {font-size: 20px;}
+        .popup_inner h1 {text-align: center;}
+        .popup_inner #popup1_msg {text-align: center;}
+        .popup_inner div div {margin-top: 20px; text-align : center ;}
         #overlay {display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #000; opacity: 0.7; z-index: 100;}
         
         #popup1 { width: 300px;}
@@ -137,10 +143,12 @@
 <body>
     <div id="popup1" class="popup">
         <div class="popup_inner">
-            <h4>罰ゲーム</h4>
+            <h1>罰ゲーム</h1>
             <div>
                 <p id="popup1_msg"></p>
-                <input type="button" id="popup1_close_btn" class="close_btn" value="閉じる"/>
+                <div>
+                  <input type="button" id="popup1_close_btn" class="close_btn" value="閉じる"/>
+                </div>
             </div>
         </div>
     </div>
@@ -151,11 +159,13 @@
     <div class="penalty_wrap" id="penalty_wrap">
     </div>
     <ul class="page_wrap">
+        <!--
         <li class="setting_btn_wrap">
             <a href="./setting.html"><img class="setting_btn" src="./img/icon_setting.png"/></a>
         </li>
+        -->
         <li class="title">
-            <p>おわり</p>
+            <p>罰ゲーム！！ハチをタップしてね♪</p>
         </li>
         <li class="main_wrap" id="main_wrap">
             <img class="balloon" name="balloonImg" src="./img/fusen_haretsu_02.png" />

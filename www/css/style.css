@@ -1,6 +1,6 @@
 #balloon {
-  width:100px;
-  height:150px;
+  width:200px;
+  height:300px;
   background: url('../img/fusen_01.png');
   position: absolute;
   top: 0;
@@ -10,15 +10,4 @@
   margin: auto;
   -moz-background-size:cover;
   background-size:cover;
-}
-
-img .balloon {
-  width:100px;
-  height:150px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  margin: auto;
 }

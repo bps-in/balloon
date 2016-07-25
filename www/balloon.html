@@ -41,16 +41,13 @@
                 // ------------------------------------------------------------
                 function TouchEventFunc(e){
                     // 1000ミリ秒ごとに「countUpDown()」関数を呼び出す繰り返しタイマー
-                    console.log("タッチスクリーン入力された");
-                              intervalID = setInterval(
-                                function(){
+                    // console.log("タッチスクリーン入力された");
+                              intervalID = setInterval( function(){
                                   countUpDown( 1 , randomNum );
-                                },
-                                1000
-                              );
+                              },1000);
                 }
                 function TouchEventEnd(e){
-                    console.log("タッチスクリーンおわり");
+                    // console.log("タッチスクリーンおわり");
                     // 繰り返しタイマーを中止
                     clearInterval( intervalID );
                 }
@@ -64,6 +61,5 @@
     <h1>風船を長押ししてね♪</h1>
     <input type="hidden" id="countTime"  value="0" >
     <div id="balloon"></div>
-    <div id="sample"></div>
 </body>
 </html>
